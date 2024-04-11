@@ -17,6 +17,7 @@ export default {
   data() {
     return {
       count: 0,
+      todo: [],
     };
   },
   methods: {
@@ -27,8 +28,6 @@ export default {
         this.count--;
       }
     },
-
-    async fetchData() {},
   },
   computed: {
     doubleCount() {
@@ -54,16 +53,18 @@ export default {
     console.log("component is mounted");
   },
   beforeUpdate() {
-    console.log("componentb efore update count value in DOM still: 0 / initial");
+    console.log(
+      "componentb efore update count value in DOM still: 0 / initial"
+    );
   },
   updated() {
     console.log("component is updated new count value is :", this.count);
   },
   beforeUnmount() {
-    console.log("component is being remove in the DOM")
-  }
+    console.log("component is being remove in the DOM");
+  },
   unmounted() {
-    console.log("component has been removed from the DOM")
+    console.log("component has been removed from the DOM");
   },
 };
 </script>

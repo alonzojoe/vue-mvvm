@@ -15,12 +15,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li v-for="(m, index) in menus" class="nav-item" :index="index">
             <router-link
-              :to="{ name: 'home' }"
-              class="nav-link active"
+              :to="{ name: m.name }"
+              class="nav-link"
+              :class="{ active: route.name === m.name }"
               aria-current="page"
-              >Home</router-link
+              >{{ m.title }}</router-link
             >
           </li>
         </ul>
@@ -30,12 +31,42 @@
 </template>
 
 <script>
+import { useRoute } from "vue-router";
 export default {
   name: "Navbar",
   setup() {
-    return {};
+    const route = useRoute();
+
+    const menus = [
+      {
+        name: "home",
+        title: "Home",
+      },
+      {
+        name: "todos",
+        title: "Todos",
+      },
+    ];
+
+    return { route, menus };
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+ul > li .active {
+  font-weight: bolder !important;
+  position: relative;
+}
+
+ul > li .active::after {
+  position: absolute;
+  content: "";
+  left: 25%;
+  bottom: -2px;
+  height: 3px;
+  width: 100%;
+  background: #ff9900;
+  transform: translateX(-25%);
+}
+</style>

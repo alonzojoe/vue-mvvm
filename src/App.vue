@@ -1,6 +1,4 @@
-<script setup>
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
+<script setup></script>
 
 <template>
   <div>
@@ -8,6 +6,4 @@ import HelloWorld from "./components/HelloWorld.vue";
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
