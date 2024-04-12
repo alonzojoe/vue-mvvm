@@ -63,6 +63,22 @@ export default {
 
     onMounted(async () => {
       await fetchTodos();
+      const newPromise = new Promise((resolve, reject) => {
+        let a = 1 + 1;
+        if (a === 2) {
+          resolve("successfully added");
+        } else {
+          reject("equation rejected");
+        }
+      });
+
+      newPromise
+        .then((message) => {
+          console.log(`Then: ${message}`);
+        })
+        .catch((rejectMessage) => {
+          console.log(`Catch: ${rejectMessage}`);
+        });
     });
 
     onBeforeUnmount(() => {
