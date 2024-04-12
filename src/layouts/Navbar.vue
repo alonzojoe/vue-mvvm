@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid d-flex justify-content-between">
       <a class="navbar-brand" href="">VMMW</a>
       <button
@@ -54,12 +54,12 @@ export default {
 </script>
 
 <style scoped>
-ul > li .active {
+ul > li .nav-link.active {
   font-weight: bolder !important;
   position: relative;
 }
 
-ul > li .active::after {
+ul > li .nav-link.active::after {
   position: absolute;
   content: "";
   left: 25%;
