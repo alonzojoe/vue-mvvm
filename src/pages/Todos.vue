@@ -2,9 +2,7 @@
   <div>
     <div class="row">
       <div class="col-12 text-align-center">
-        <div
-          class="d-flex align-items-center justify-content-center flex-column"
-        >
+        <div class="d-flex align-items-center justify-content-center flex-column">
           <h1 class="my-3">Todos</h1>
           <div class="spinner-border my-5" v-if="isLoading">
             <span class="visually-hidden">Loading...</span>
@@ -12,24 +10,17 @@
 
           <div v-else>
             <!-- <pre>{{ todos }}</pre> -->
-            <div
-              class="card mb-3"
-              v-for="(todo, index) in todos"
-              :index="index"
-            >
-              <div class="card-body">
+            <div class="card mb-3" v-for="(todo, index) in todos" :index="index">
+              <div class="card-body position-relative">
+                <button class="btn btn-danger btn-sm py-1 px-2" @click="deleteTodo(todo)"
+                  style="position: absolute; right: 0; top: 0;">x</button>
                 <h5 class="card-title">{{ todo.id }}. {{ todo.title }}</h5>
                 <div class="d-flex align-items-center justify-content-between">
                   <span>Status:</span>
-                  <span
-                    class="badge"
-                    :class="
-                      todo.completed ? 'text-bg-primary' : 'text-bg-warning'
-                    "
-                    >{{
-                      todo.completed === true ? "Completed" : "On-Going"
-                    }}</span
-                  >
+                  <span class="badge" :class="todo.completed ? 'text-bg-primary' : 'text-bg-warning'
+            ">{{
+            todo.completed === true ? "Completed" : "On-Going"
+                    }}</span>
                 </div>
               </div>
             </div>
@@ -61,6 +52,19 @@ export default {
       }
     };
 
+    const deleteTodo = (todo) => {
+      let confirmation = confirm(`Are you sure to remove ${todo.title}`)
+
+      if (!confirmation) return;
+
+      const index = todos.value.findIndex((t) => t.id === todo.id)
+      console.log(index)
+      if (index !== -1) {
+        todos.value.splice(index, 1)
+      }
+
+    }
+
     onMounted(async () => {
       await fetchTodos();
       const newPromise = new Promise((resolve, reject) => {
@@ -89,7 +93,7 @@ export default {
       console.log("todos component is unmounted");
     });
 
-    return { todos, isLoading };
+    return { todos, isLoading, deleteTodo };
   },
 };
 </script>
