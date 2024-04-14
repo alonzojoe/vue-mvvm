@@ -68,8 +68,24 @@ export default {
 
     }
 
+    let items = [14, 78, 34, 71, 69, 173]
+    const findHighestItem = (items) => {
+      let lowest = items[0]
+
+      for (let index = 1; index < items.length; index++) {
+
+        if (items[index] < lowest) {
+          lowest = items[index]
+        }
+
+      }
+
+      console.log('hghest', lowest)
+    }
+
     onMounted(async () => {
       await fetchTodos();
+      findHighestItem(items)
       const newPromise = new Promise((resolve, reject) => {
         let a = 1 + 1;
         if (a === 2) {
