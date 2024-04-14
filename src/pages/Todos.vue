@@ -57,6 +57,9 @@ export default {
 
       if (!confirmation) return;
 
+      todos.value = todos.value.filter((t) => t.id !== todo.id)
+
+      return;
       const index = todos.value.findIndex((t) => t.id === todo.id)
       console.log(index)
       if (index !== -1) {
