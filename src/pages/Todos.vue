@@ -206,7 +206,8 @@ export default {
       console.log("Minute", newDate.getMinutes());
       console.log("Seconds", newDate.getSeconds());
 
-      //
+      //day of week //sunday = 0, monday =1
+      console.log("Day of Week", newDate.getDay());
     };
 
     onMounted(async () => {
