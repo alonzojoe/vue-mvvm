@@ -157,6 +157,50 @@ export default {
 
       console.log("Array reduce grouping persons by age", groupPersons);
     };
+    const sales = [
+      { employeeId: 1, amount: 100 },
+      { employeeId: 2, amount: 200 },
+      { employeeId: 1, amount: 150 },
+      { employeeId: 3, amount: 300 },
+    ];
+
+    const customers = [
+      { customerId: 101, employeeId: 1 },
+      { customerId: 102, employeeId: 2 },
+      { customerId: 103, employeeId: 1 },
+      { customerId: 104, employeeId: 3 },
+    ];
+
+    const calculateCustomerSales = (sales, customers) => {
+      const totalSales = {};
+
+      sales.forEach((sale) => {
+        const customer = customers.find(
+          (customer) => customer.employeeId === sale.employeeId
+        );
+
+        if (customer) {
+          totalSales[sale.employeeId] =
+            (totalSales[sale.employeeId] || 0) + sale.amount;
+        }
+      });
+      console.log("total sales", totalSales);
+      return totalSales;
+    };
+
+    const jsDates = () => {
+      console.clear();
+      //new Date format(year, month, hour, minute, second, millisecond )
+      //for month it starts with 0;
+      //for time military
+      //argument Date(2024, 0, 1, 2, 3, 4, 5);
+      //new arg Date("2024-01-02T12:00:00Z");
+      const newDate = new Date();
+      console.log("Javascript Dates", newDate);
+      console.log("Year", newDate.getFullYear());
+      console.log("Month", newDate.getMonth());
+      console.log("Day", newDate.getDate()); //returns numeric
+    };
 
     onMounted(async () => {
       await fetchTodos();
@@ -183,6 +227,9 @@ export default {
       reduceArrObjects();
       mergedObjects();
       groupAges();
+
+      calculateCustomerSales(sales, customers);
+      jsDates();
     });
 
     onBeforeUnmount(() => {
