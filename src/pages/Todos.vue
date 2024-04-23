@@ -97,14 +97,13 @@ export default {
     };
 
     const arrReduce = () => {
-      console.log("array reduce single array");
       const items = [1, 2, 3];
 
       const totalItems = items.reduce((total, item) => {
         return total + item;
       }, 0);
 
-      console.log(totalItems);
+      console.log("array reduce single array", totalItems);
     };
 
     const reduceArrObjects = () => {
@@ -151,7 +150,7 @@ export default {
       const groupPersons = persons.reduce((group, person) => {
         if (!group[person.age]) group[person.age] = [];
 
-        group[person.age].push(person);
+        group[person.age].push(person.name);
 
         return group;
       }, {});
@@ -179,6 +178,7 @@ export default {
           console.log(`Catch: ${rejectMessage}`);
         });
 
+      console.clear();
       arrReduce();
       reduceArrObjects();
       mergedObjects();
