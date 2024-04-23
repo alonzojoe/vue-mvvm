@@ -208,6 +208,15 @@ export default {
 
       //day of week //sunday = 0, monday =1
       console.log("Day of Week", newDate.getDay());
+
+      //formatter
+      console.log("localeString", newDate.toLocaleString("en-us"));
+      const formatter = Intl.DateTimeFormat("en-US", {
+        dateStyle: "full",
+        timeStyle: "full",
+      });
+
+      console.log("formatted", formatter.format(newDate));
     };
 
     onMounted(async () => {
