@@ -2,7 +2,9 @@
   <div>
     <div class="row">
       <div class="col-12 text-align-center">
-        <div class="d-flex align-items-center justify-content-center flex-column">
+        <div
+          class="d-flex align-items-center justify-content-center flex-column"
+        >
           <h1 class="my-3">Todos</h1>
           <div class="spinner-border my-5" v-if="isLoading">
             <span class="visually-hidden">Loading...</span>
@@ -10,17 +12,31 @@
 
           <div v-else>
             <!-- <pre>{{ todos }}</pre> -->
-            <div class="card mb-3" v-for="(todo, index) in todos" :index="index">
+            <div
+              class="card mb-3"
+              v-for="(todo, index) in todos"
+              :index="index"
+            >
               <div class="card-body position-relative">
-                <button class="btn btn-danger btn-sm py-1 px-2" @click="deleteTodo(todo)"
-                  style="position: absolute; right: 0; top: 0;">x</button>
+                <button
+                  class="btn btn-danger btn-sm py-1 px-2"
+                  @click="deleteTodo(todo)"
+                  style="position: absolute; right: 0; top: 0"
+                >
+                  x
+                </button>
                 <h5 class="card-title">{{ todo.id }}. {{ todo.title }}</h5>
                 <div class="d-flex align-items-center justify-content-between">
                   <span>Status:</span>
-                  <span class="badge" :class="todo.completed ? 'text-bg-primary' : 'text-bg-warning'
-            ">{{
-            todo.completed === true ? "Completed" : "On-Going"
-                    }}</span>
+                  <span
+                    class="badge"
+                    :class="
+                      todo.completed ? 'text-bg-primary' : 'text-bg-warning'
+                    "
+                    >{{
+                      todo.completed === true ? "Completed" : "On-Going"
+                    }}</span
+                  >
                 </div>
               </div>
             </div>
@@ -53,39 +69,99 @@ export default {
     };
 
     const deleteTodo = (todo) => {
-      let confirmation = confirm(`Are you sure to remove ${todo.title}`)
+      let confirmation = confirm(`Are you sure to remove ${todo.title}`);
 
       if (!confirmation) return;
 
-      todos.value = todos.value.filter((t) => t.id !== todo.id)
+      todos.value = todos.value.filter((t) => t.id !== todo.id);
 
       return;
-      const index = todos.value.findIndex((t) => t.id === todo.id)
-      console.log(index)
+      const index = todos.value.findIndex((t) => t.id === todo.id);
+      console.log(index);
       if (index !== -1) {
-        todos.value.splice(index, 1)
+        todos.value.splice(index, 1);
       }
+    };
 
-    }
-
-    let items = [14, 78, 34, 71, 69, 173]
+    let items = [14, 78, 34, 71, 69, 173];
     const findHighestItem = (items) => {
-      let lowest = items[0]
+      let lowest = items[0];
 
       for (let index = 1; index < items.length; index++) {
-
         if (items[index] < lowest) {
-          lowest = items[index]
+          lowest = items[index];
         }
-
       }
 
-      console.log('hghest', lowest)
-    }
+      console.log("hghest", lowest);
+    };
+
+    const arrReduce = () => {
+      console.log("array reduce single array");
+      const items = [1, 2, 3];
+
+      const totalItems = items.reduce((total, item) => {
+        return total + item;
+      }, 0);
+
+      console.log(totalItems);
+    };
+
+    const reduceArrObjects = () => {
+      const items = [
+        { name: "Rice", price: 45 },
+        { name: "Coke", price: 25 },
+        { name: "Load", price: 50 },
+        { name: "T-Shirt", price: 150 },
+      ];
+
+      const totalPrice = items.reduce((total, item) => {
+        return total + item.price;
+      }, 0);
+      console.log("array reduce arr of objects tota:", totalPrice);
+    };
+
+    const mergedObjects = () => {
+      const requests = [
+        { requestID: 134, department: "Billing" },
+        { requestID: 135, department: "Accounting" },
+        { requestID: 136, department: "HR" },
+        { requestID: 137, department: "Accounting" },
+      ];
+
+      const mergedRequests = requests.reduce((item, req) => {
+        if (!item[req.department]) {
+          item[req.department] = req;
+        }
+        return item;
+      }, {});
+
+      console.log("reduce merge departments", Object.values(mergedRequests));
+    };
+
+    const groupAges = () => {
+      const persons = [
+        { name: "John", age: 28 },
+        { name: "Jane", age: 25 },
+        { name: "Tom", age: 39 },
+        { name: "Mary", age: 25 },
+        { name: "Mirna", age: 28 },
+      ];
+
+      const groupPersons = persons.reduce((group, person) => {
+        if (!group[person.age]) group[person.age] = [];
+
+        group[person.age].push(person);
+
+        return group;
+      }, {});
+
+      console.log("Array reduce grouping persons by age", groupPersons);
+    };
 
     onMounted(async () => {
       await fetchTodos();
-      findHighestItem(items)
+      findHighestItem(items);
       const newPromise = new Promise((resolve, reject) => {
         let a = 1 + 1;
         if (a === 2) {
@@ -95,13 +171,18 @@ export default {
         }
       });
 
-      newPromise
+      await newPromise
         .then((message) => {
           console.log(`Then: ${message}`);
         })
         .catch((rejectMessage) => {
           console.log(`Catch: ${rejectMessage}`);
         });
+
+      arrReduce();
+      reduceArrObjects();
+      mergedObjects();
+      groupAges();
     });
 
     onBeforeUnmount(() => {
