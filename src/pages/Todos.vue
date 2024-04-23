@@ -200,6 +200,13 @@ export default {
       console.log("Year", newDate.getFullYear());
       console.log("Month", newDate.getMonth());
       console.log("Day", newDate.getDate()); //returns numeric
+
+      //time
+      console.log("Hour", newDate.getHours());
+      console.log("Minute", newDate.getMinutes());
+      console.log("Seconds", newDate.getSeconds());
+
+      //
     };
 
     onMounted(async () => {
