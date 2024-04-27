@@ -117,7 +117,7 @@ export default {
       const totalPrice = items.reduce((total, item) => {
         return total + item.price;
       }, 0);
-      console.log("array reduce arr of objects tota:", totalPrice);
+      console.log("array reduce arr of objects total:", totalPrice);
     };
 
     const mergedObjects = () => {
@@ -157,25 +157,25 @@ export default {
 
       console.log("Array reduce grouping persons by age", groupPersons);
     };
-    const sales = [
+    const sales = ref([
       { employeeId: 1, amount: 100 },
       { employeeId: 2, amount: 200 },
       { employeeId: 1, amount: 150 },
       { employeeId: 3, amount: 300 },
-    ];
+    ]);
 
-    const customers = [
+    const customers = ref([
       { customerId: 101, employeeId: 1 },
       { customerId: 102, employeeId: 2 },
       { customerId: 103, employeeId: 1 },
       { customerId: 104, employeeId: 3 },
-    ];
+    ]);
 
     const calculateCustomerSales = (sales, customers) => {
       const totalSales = {};
 
-      sales.forEach((sale) => {
-        const customer = customers.find(
+      sales.value.forEach((sale) => {
+        const customer = customers.value.find(
           (customer) => customer.employeeId === sale.employeeId
         );
 
