@@ -2,18 +2,26 @@
   <div class="d-flex align-items-center justify-content-center">
     <div class="card">
       <div class="card-body">
-        <div class="card-title">Home Component</div>
+        <div class="card-title">Home Component {{ msg }}</div>
         <button @click="mutateCount('increment')">+</button>
         <span style="margin: 0 20px">{{ count }}</span>
         <button @click="mutateCount('decrement')">-</button>
         <p>Computed Property: {{ doubleCount }}</p>
       </div>
     </div>
+    <input ref="myComponent" type="text" />
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    msg: {
+      type: String,
+      default: "Joe",
+      required: false,
+    },
+  },
   data() {
     return {
       count: 0,
@@ -27,6 +35,9 @@ export default {
       } else {
         this.count--;
       }
+    },
+    welcomeMessage(message) {
+      console.log("message :", message);
     },
   },
   computed: {
@@ -51,6 +62,13 @@ export default {
   },
   mounted() {
     console.log("component is mounted");
+    if (this.msg === "Joe") {
+      console.log(this.msg);
+    }
+    this.$refs.myComponent.style.backgroundColor = "#fff";
+    this.$refs.myComponent.style.color = "#000";
+    this.$refs.myComponent.focus();
+    this.welcomeMessage("welcome to home component");
   },
   beforeUpdate() {
     console.log(
